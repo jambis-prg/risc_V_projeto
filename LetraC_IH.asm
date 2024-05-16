@@ -63,8 +63,6 @@ sw x23, vc
 # x = 0
 add x24, x0, x0
 
-sw x24, vx
-
 # Comparação de a
 addi x5, x0, 5 
 addi x6, x0, 45 # sinal de -
