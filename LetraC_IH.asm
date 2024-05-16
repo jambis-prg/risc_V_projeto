@@ -69,9 +69,8 @@ blt x19, x5, Else # comp se a < 5
 
 # Comparação de b
 addi x5, x0, 65
-addi x6, x0, 43 # sinal de +
 
-beq x20, x6, Else # compara sinal de b
+beq x20, x6, Final_Comp # compara sinal de b
 blt x21, x5, Final_Comp # comp se b < 65
 bne x21, x5, Else
 
@@ -85,10 +84,12 @@ Final_Comp:
 	beq x23, x5, Else
 
 addi x24, x0, 1
-
+addi x5, x0, 1
+beq x24, x5, End
 # Mostrar na tela
 Else:
     addi x24, x24, 48
 	sb x24, 1024(x0)
 
-halt
+End:
+    halt
