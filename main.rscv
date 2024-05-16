@@ -18,11 +18,9 @@ Final_Comp:
 addi x20, x0, 1
 
 Else: sw x20, vx
-addi x20, x20, 1
 halt
 
 va:.word 0x10
 vb:.word 0x10
 vc:.word 0x10
 vx:.word 0x10
-
