@@ -16,44 +16,41 @@ sub x29, x29, x5 # conversão ascii
 sub x30, x30, x5
 
 # Mult por 10
-add x31, x29, x0 # salvo valor
-slli x29, x29, 2 # x29 = valor * 4
-add x31, x31, x29 # x31 = valor * 5
-slli x29, x31, 1 # x29 = valor * 10
+slli x31, x29, 3 #salva valor * 8 em x31
+slli x29, x29, 1 #salva valor * 2 em x29
+add x29, x29, x31 #salva 8x + 2x em x29
 
-# a
+# Soma o valor da dezena e unidade de A
 add x19, x29, x30
 
 lb x20, 1025(x0) # sinal de B
 lb x29, 1025(x0) # Decimal de B
 lb x30, 1025(x0) # Unidade de B
 
-sub x29, x29, x5
+sub x29, x29, x5 # conversão ascii
 sub x30, x30, x5
 
 # Mult por 10
-add x31, x29, x0 # salvo valor
-slli x29, x29, 2 # x29 = valor * 4
-add x31, x31, x29 # x31 = valor * 5
-slli x29, x31, 1 # x29 = valor * 10
+slli x31, x29, 3 #salva valor * 8 em x31
+slli x29, x29, 1 #salva valor * 2 em x29
+add x29, x29, x31 #salva 8x + 2x em x29
 
-# b
+# Soma o valor da dezena e unidade de B
 add x21, x29, x30
 
 lb x22, 1025(x0) # sinal de C
 lb x29, 1025(x0) # Decimal de C
 lb x30, 1025(x0) # Unidade de C
 
-sub x29, x29, x5
+sub x29, x29, x5 # conversão ascii
 sub x30, x30, x5
 
 # Mult por 10
-add x31, x29, x0 # salvo valor
-slli x29, x29, 2 # x29 = valor * 4
-add x31, x31, x29 # x31 = valor * 5
-slli x29, x31, 1 # x29 = valor * 10
+slli x31, x29, 3 #salva valor * 8 em x31
+slli x29, x29, 1 #salva valor * 2 em x29
+add x29, x29, x31 #salva 8x + 2x em x29
 
-# c
+# Soma o valor da dezena e unidade de C
 add x23, x29, x30
 
 # Terminou de ler
@@ -77,19 +74,15 @@ bne x21, x5, Else
 # Comparação de c
 Final_Comp:
 	addi x5, x0, 15
-	addi x6, x0, 45 # sinal de -
 
 	beq x22, x6, Else # compara sinal de c
 	blt x23, x5, Else 
 	beq x23, x5, Else
 
 addi x24, x0, 1
-addi x5, x0, 1
-beq x24, x5, End
-# Mostrar na tela
-Else:
-    addi x24, x24, 48
-	sb x24, 1024(x0)
 
-End:
-    halt
+# Mostrar na tela
+Else: 
+	addi x24, x24, 48
+	sb x24, 1024(x0)
+halt
