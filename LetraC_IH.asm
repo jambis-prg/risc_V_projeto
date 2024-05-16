@@ -89,12 +89,11 @@ Final_Comp:
 
 addi x24, x0, 1
 
-sw x24, vx
-
 # Mostrar na tela
 Else: 
 	addi x24, x24, 48
 	sb x24, 1024(x0)
+	sw x24, vx
 halt
 
 va : .word 0x00
