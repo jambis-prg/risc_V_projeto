@@ -6,6 +6,10 @@ add x9, x10, x0 #player_1 = GetScore()
 jal x1, Get_String_And_Score
 add x18, x10, x0 #player_2 = GetScore()
 
+#Player 1 ganha resultado no monitor é 1
+#Player 2 ganha resultado no monitor é 2
+#Empate resultado no monitor é 0
+
 addi x5, x0, 48
 beq x9, x18, Show_Monitor
  
