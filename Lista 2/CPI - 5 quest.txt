@@ -1,0 +1,33 @@
+Calculo CPI questão 5
+
+Antes do Loop:
+
+lb - 5 ( 5 * 1 )
+sb - 4	( 4 * 1 )
+
+Loop:
+
+lh - 5 ( 5 * 1 )
+addi - 20 ( 4 * 5 )
+blt - 20 ( 4 * 5 )
+beq - 24 ( 4 * 6 )
+
+Caso:
+
+addi - 12 ( 4 * 3 )
+sb - 12 ( 4 * 3 )
+beq - 4 ( 4 * 1 )
+
+Ciclos Total = 106
+Instruções Total = 26
+
+CPI = 4 aproximadamente
+
+* Calculando CPU time *
+
+CPI = 4
+Instruções = 26
+frequência = 100 hz 
+
+CPU time = ( 26 * 4 ) / 100
+CPU time = 1.04 s

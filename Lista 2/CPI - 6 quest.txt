@@ -1,0 +1,20 @@
+Calculo CPI questão 6
+
+Sem entrar nos casos:
+
+addi - 11 * 4
+lb - 4 * 5
+add - 3 * 4
+sub - 4 * 4 
+slli - 3 * 4
+beq - 11 * 4
+
+Entrando no caso:
+
+addi - 2 * 4
+sb - 2 * 4
+beq - 1 * 4
+
+Ciclos total = 168
+Instruções totais = 41
+CPI = 4 aproximadamente
