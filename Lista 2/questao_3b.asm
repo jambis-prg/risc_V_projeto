@@ -87,6 +87,22 @@ mult:
 	jal x0, result_digits
 
 fim:
+	addi x19, x19, -1 # correção
+	
+	print:
+		addi x20, x0, -1 # condição de parada
+		beq x19, x20, exit # if cont == -1 exit
+	
+		slli x6, x19, 3 # x6 = cont * 8
+    		add x18, x5, x6 # address of arr[i]
+    
+		lw x10, 0(x18) # x10 = arr[i]
+		sb x10, 1024(x0) # printa
+    
+		addi x19, x19, -1 # cont++
+		jal x0, print
+
+exit:
 	halt
 
 # Função Mul
@@ -113,39 +129,39 @@ Mul:
 
 
 result_digits:
-    /* CRIAR LÓGICA P/ PEGAR CADA DÍGITO*/
-    
+    addi x5, x0, 0 # array p/ os digitos
+    addi x19, x0, 0 # cont
+    addi x15, x10, 0 # temp
+    addi x7, x0, 0 # digitos
 
-# Função div
-# Parametros: x14 = dividendo, x15 = divisor
-# Resultados: x10 = quociente, x11 = resto
+    # while temp > 0
+    loop:
+        bge x15, x0, dif # if temp >= 0
+        dif:
+            beq x15, x0, fim # if temp == 0 sai
+
+        jal x1, div
+        addi x7, x11, 0 # digito = temp % 10    
+        addi x7, x7, 48 # ascii
+
+        slli x6, x19, 3 # x6 = cont * 8
+        add x18, x5, x6 # address of arr[i]
+        sw x7, 0(x18) # arr[i] = x7
+        addi x19, x19, 1 # cont++
+
+        jal x0, loop
+
 div:
-    addi x27, x0, 0 # contador
-    addi x28, x0, 32 # Limite do loop (32 bits)
-    addi x14, x10, 0 # Inicializa o dividendo
-    addi x10, x0, 0  # Inicializa quociente
-    addi x11, x14, 0 # Inicializa resto com o dividendo
+    addi x14, x0, 10 # divisor
+    addi x10, x0, 0 # quociente = 0
+    addi x11, x15, 0 # resto = dividendo
 
-    div_Loop:
-        sub x11, x11, x15 # resto -= divisor
-        blt x11, x0, men_que # if resto < 0
-		
-		# resto >= 0
-        slli x10, x10, 1
+    div_loop:
+        blt x11, x14, div_exit
+        sub x11, x11, x14
         addi x10, x10, 1
-        jal x0, continue
-
-        # resto < 0
-        men_que:
-            add x11, x11, x15
-            slli x10, x10, 1
-
-        continue:
-            srli x15, x15, 1
-			addi x27, x27, 1
-            beq x27, x28, div_exit # if x27 == x28 then exit
-            beq x11, x15, div_exit
-            jal x0, div_Loop
-                        
-    div_exit:
-        jalr x0, 0(x1) # retorna a função
+        jal x0, div_loop
+        
+        div_exit:
+            addi x15, x10, 0 # temp = temp / 10
+            jalr x0, 0(x1)
