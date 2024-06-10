@@ -1,6 +1,6 @@
 get_num:
     lw - 5 ciclos * 2
-    jal - 3 ciclos
+    jal - 4 ciclos
 
 fim:
     halt (Não é executado)
@@ -11,16 +11,16 @@ Mul:
     (Pior caso: 32 iterações)
     Mul_loop:
         and - 4 ciclos * 32
-        beq - 3 ciclos * 32
+        beq - 4 ciclos * 32
         add - 4 ciclos * 32
 
     Skip:
         slli - 4 ciclos * 32
         srli - 4 ciclos * 32
-        bne - 3 ciclos * 32
+        bne - 4 ciclos * 32
 
     Exit_loop:
         jalr - 4 ciclos
 
 
-Total: 10 + 3 + 8 + 128 + 96 + 128 + 128 + 128 + 96 + 4 = 729 ciclos
+Total: 10 + 4 + 8 + 128 + 128 + 128 + 128 + 128 + 128 + 4 = 794 ciclos
