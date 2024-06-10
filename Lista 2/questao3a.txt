@@ -20,7 +20,7 @@ Mul:
         bne - 3 ciclos * 32
 
     Exit_loop:
-        jalr - 3 ciclos
+        jalr - 4 ciclos
 
 
-Total: 10 + 5 + 8 + 128 + 96 + 128 + 128 + 128 + 96 + 3 = 730 ciclos
+Total: 10 + 3 + 8 + 128 + 96 + 128 + 128 + 128 + 96 + 4 = 729 ciclos
