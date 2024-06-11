@@ -67,19 +67,19 @@ mult:
 fim:
 	addi - 4 ciclos
 	
-    (Pior Caso 10 digitos)
+    (Pior Caso 9 digitos)
 	print:
-		addi - 4 ciclos * 10
-		beq - 4 ciclos * 10
+		addi - 4 ciclos * 9
+		beq - 4 ciclos * 9
 	
-		slli - 4 ciclos * 10
-    	add - 4 ciclos * 10
+		slli - 4 ciclos * 9
+    		add - 4 ciclos * 9
     
-		lw - 5 ciclos * 10
-		sb - 4 ciclos * 10
-		addi - 4 ciclos * 10
-		jal - 4 ciclos * 10
--------------------------------- Total parcial: 628 ciclos
+		lw - 5 ciclos * 9
+		sb - 4 ciclos * 9
+		addi - 4 ciclos * 9
+		jal - 4 ciclos * 9
+-------------------------------- Total parcial: 595 ciclos
 
 exit:
 	halt - Não executada
@@ -102,7 +102,7 @@ Mul:
 
     Exit_Loop:
         jalr - 4 ciclos
--------------------------------- Total parcial: 4528 ciclos
+-------------------------------- Total parcial: 4497 ciclos
 
 result_digits:
     addi - 4 ciclos
@@ -110,25 +110,25 @@ result_digits:
     addi - 4 ciclos
     addi - 4 ciclos
 
-    (Pior caso 10 dígitos)
+    (Pior caso 9 dígitos)
     loop:
-        bge - 4 ciclos * 10
+        bge - 4 ciclos * 9
         dif:
-            beq - 4 ciclos * 10
+            beq - 4 ciclos * 9
 
-        jal - 4 ciclos * 10
-        addi - 4 ciclos * 10
-        addi - 4 ciclos * 10
+        jal - 4 ciclos * 9
+        addi - 4 ciclos * 9
+        addi - 4 ciclos * 9
 
-        slli - 4 ciclos * 10
-        add - 4 ciclos * 10
-        sw - 4 ciclos * 10
-        addi - 4 ciclos * 10
+        slli - 4 ciclos * 9
+        add - 4 ciclos * 9
+        sw - 4 ciclos * 9
+        addi - 4 ciclos * 9
 
-        jal - 4 ciclos * 10
------------------------------------ Total parcial: 4944 ciclos
+        jal - 4 ciclos * 9
+----------------------------------- Total parcial: 4873 ciclos
 
-(Pior caso 10 chamadas)
+(Pior caso 9 chamadas)
 div:
     addi - 4 ciclos
     addi - 4 ciclos
@@ -145,4 +145,4 @@ div:
             addi - 4 ciclos
             jalr - 4 ciclos
 
-Total: 434.359.743.384 ciclos
+Total: 30.923.769.469 ciclos
