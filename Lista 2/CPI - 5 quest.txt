@@ -1,33 +1,131 @@
 Calculo CPI questão 5
 
-Antes do Loop:
+* Calculando CPI *
 
-lb - 5 ( 5 * 1 )
-sb - 4	( 4 * 1 )
+lb - 1 * 5
+sb - 4 * 4
+lh - 1 * 5
+addi - 13 * 4
+blt - 5 * 4
+beq - 7 * 4
 
-Loop:
+Ciclos Total = 126
+Instruções Total = 31
 
-lh - 5 ( 5 * 1 )
-addi - 20 ( 4 * 5 )
-blt - 20 ( 4 * 5 )
-beq - 24 ( 4 * 6 )
-
-Caso:
-
-addi - 12 ( 4 * 3 )
-sb - 12 ( 4 * 3 )
-beq - 4 ( 4 * 1 )
-
-Ciclos Total = 106
-Instruções Total = 26
-
+CPI = 126 / 31
 CPI = 4 aproximadamente
 
 * Calculando CPU time *
 
 CPI = 4
-Instruções = 26
+Instruções = 31
 frequência = 100 hz 
 
-CPU time = ( 26 * 4 ) / 100
-CPU time = 1.04 s
+CPU time = ( 31 * 4 ) / 100
+CPU time = 1.24 s
+
+* Calculando taxa de leitura *
+
+Padrão:
+
+lb - 1 * 5
+sb - 4 * 5
+lh - 1 * 5
+addi - 2 * 4
+beq - 1 * 4
+
+Ciclos: 42
+intruções: 9
+
+Por caso:
+(exceto o caso 6 que aumenta 8 ciclos e 2 instruções)
+
+addi - 2 * 4
+blt - 1 * 4
+beq - 1 * 4
+
+Ciclos: 16
+instruções: 4
+
+Para calcular a taxa de leitura, vamos calcular o tempo para exibir o resultado para cada de temperatura e fazer uma media do tempo gasto:
+
+T1: 
+	Padrão + 1 Por caso
+
+	Ciclos: 58
+	Instruções: 13
+	CPI: 4,5
+	
+	Frequência: 100 hz
+	
+	CPU: ( 13 * 4,5 ) / 100 = 0,58
+
+T2:
+	Padrão + 2 Por caso
+
+	Ciclos: 74
+	Instruções: 17
+	CPI: 4,3
+	
+	Frequência: 100 hz
+	
+	CPU: ( 17 * 4,3 ) / 100 = 0,73
+
+T3:
+	Padrão + 3 Por caso
+
+	Ciclos: 90
+	Instruções: 21
+	CPI: 4,2
+	
+	Frequência: 100 hz
+	
+	CPU: ( 21 * 4,2 ) / 100 = 0,88
+
+T4:
+	Padrão + 4 Por caso
+
+	Ciclos: 106
+	Instruções: 25
+	CPI: 4,2
+	
+	Frequência: 100 hz
+	
+	CPU: ( 25 * 4,2 ) / 100 = 1,05
+
+T5:
+	Padrão + 5 Por caso
+
+	Ciclos: 122
+	Instruções: 29
+	CPI: 4,2
+	
+	Frequência: 100 hz
+	
+	CPU: ( 29 * 4,2 ) / 100 = 1,21
+
+T6:
+	Padrão + 6 Por caso (Aq só aumenta 2 instruções e 8 ciclos)
+
+	Ciclos: 130
+	Instruções: 31
+	CPI: 4,1
+	
+	Frequência: 100 hz
+	
+	CPU: ( 31 * 4,1 ) / 100 = 1,27
+
+Taxa: (1,27 + 1,21 + 1,05 + 0,88 + 0,73 + 0,58) / 6
+Taxa: 0,95 s
+
+* Se tivesse sped-up de 10x *
+
+Taxa / 10 -> 0,95 / 10 -> 0,095
+
+Taxa deveria ser 0,095 para isso:
+
+(31 * 4,1) / x = 0,095
+x = 127 / 0,095
+
+x = 1.337 hz
+
