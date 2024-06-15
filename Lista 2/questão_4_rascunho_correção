@@ -1,0 +1,46 @@
+.data
+factorials: .word 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880
+
+.text
+.globl main
+main:
+    # Inicialização
+    li x8, 0 # x8 será usado para armazenar a soma dos fatoriais
+    li x10, 1 # x10 será usado para iterar sobre os dígitos do número
+
+loop:
+    # Ler um caractere do teclado (supondo que esteja no registrador a0)
+    lbu x9, 0(a0)
+
+    # Verificar se o caractere é um dígito (entre '0' e '9')
+    li x11, 48
+    blt x9, x11, not_digit
+    li x11, 57
+    bge x9, x11, digit
+
+not_digit:
+    # Ler o próximo caractere
+    addi a0, a0, 1
+    j check_digits
+
+digit:
+    # Converter o caractere em número (subtraindo 48)
+    sub x9, x9, 48
+
+    # Calcular o endereço do fatorial na tabela
+    slli x11, x9, 2
+    add x11, x11, factorials
+
+    # Adicionar o fatorial à soma
+    lw x12, 0(x11)
+    add x8, x8, x12
+
+    # Ler o próximo caractere
+    addi a0, a0, 1
+
+check_digits:
+    # Verificar se ainda há dígitos (até 5 caracteres)
+    li x13, 5
+    bne x10, x13, loop
+
+    # A soma dos fatoriais está agora em x8
