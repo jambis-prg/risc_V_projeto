@@ -4,13 +4,13 @@
 # Converter char em int
 addi x5, x0, 48 
 
-# Lendo números:
+# Lendo nÃºmeros:
 lb x28, 1025(x0) # Bit D
 lb x29, 1025(x0) # Bit C
 lb x30, 1025(x0) # Bit B
 lb x31, 1025(x0) # Bit A
 
-# Converter ASCII para número
+# Converter ASCII para nÃºmero
 sub x28, x28, x5
 sub x29, x29, x5
 sub x30, x30, x5
@@ -26,115 +26,92 @@ add x10, x28, x29
 add x10, x10, x30
 add x10, x10, x31
 
-#Comparações para vê qual ope fazer
-addi x5, x0, 15
-beq x10, x5, LIMPAR
+#ComparaÃ§Ãµes para vÃª qual ope fazer
 
-beq x10, x0, ZERO
+# coloca um numero no registrador, pq 
+# transforma em binario e cada bit
+# vai para uma porta (comecando do g atÃ© b)	
+
+# Limpar:
+addi x12, x0, 0
+addi x13, x0, 000000
+
+addi x5, x0, 15
+beq x10, x5, PRINTAR
+
+# Zero:
+addi x12, x0, 1 # Passa os parametros
+addi x13, x0, 31
+
+beq x10, x0, PRINTAR # Verifica se Ã© para printar
+
+# Um:
+addi x12, x0, 0
+addi x13, x0, 3
 
 addi x5, x0, 1
-beq x10, x5, UM
+beq x10, x5, PRINTAR	
+
+# Dois:
+addi x12, x0, 1
+addi x13, x0, 45
 
 addi x5, x5, 1
-beq x10, x5, DOIS
+beq x10, x5, PRINTAR
+
+# Tres: 
+addi x12, x0, 1
+addi x13, x0, 39
 
 addi x5, x5, 1
-beq x10, x5, TRES
+beq x10, x5, PRINTAR
+
+# Quatro:
+addi x12, x0, 0
+addi x13, x0, 51
 
 addi x5, x5, 1
-beq x10, x5, QUATRO
+beq x10, x5, PRINTAR
+
+# Cinco:
+addi x12, x0, 1
+addi x13, x0, 54
 
 addi x5, x5, 1
-beq x10, x5, CINCO
+beq x10, x5, PRINTAR
+
+# Seis:
+addi x12, x0, 1
+addi x13, x0, 62
 
 addi x5, x5, 1
-beq x10, x5, SEIS
+beq x10, x5, PRINTAR
+
+# Sete:
+addi x12, x0, 1
+addi x13, x0, 3
 
 addi x5, x5, 1
-beq x10, x5, SETE
+beq x10, x5, PRINTAR
+
+# Oito:
+addi x12, x0, 1
+addi x13, x0, 63
 
 addi x5, x5, 1
-beq x10, x5, OITO
+beq x10, x5, PRINTAR
+
+# Nove:
+addi x12, x0, 1
+addi x13, x0, 51
 
 addi x5, x5, 1
-beq x10, x5, NOVE
+beq x10, x5, PRINTAR
 
 # Passando os valores para as portas
 # do display 
-ZERO:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	#coloca um numero no registrador, pq 
-	#transforma em binario e cada bit
-	# vai para uma porta (comecando do g até b)
-	addi x6, x0, 31
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
 
-UM:
-	sb x0, 1029(x0)
-	addi x6, x0, 3
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-DOIS:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 45
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-TRES:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 39
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-QUATRO:
-	sb x0, 1029(x0)
-	addi x6, x0, 51
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-CINCO:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 54
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-SEIS:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 62
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-SETE:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 3
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-OITO:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 63
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-NOVE:
-	addi x6, x0, 1
-	sb x6, 1029(x0)
-	addi x6, x0, 51
-	sb x6, 1027(x0)
-	beq x0,x0, ACABAR
-
-
-LIMPAR:
-	addi x6, x0,000000
-	sb x0, 1029(x0)
-	sb x6, 1027(x0)
-
-ACABAR:
+PRINTAR:	
+	sb x12, 1029(x0)
+	sb x13, 1027(x0)
 	halt
