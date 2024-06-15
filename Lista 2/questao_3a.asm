@@ -1,6 +1,6 @@
 get_num:
-    lw x12, 0(x20) # num1
-    lw x13, 0(x21) # num2
+    lw x12, num1 # num1
+    lw x13, num2 # num2
     jal x1, Mul # multiplicação
 
 fim:
@@ -25,3 +25,6 @@ Mul:
 
     Exit_Loop:
         jalr x0, 0(x1) # Retorna a chamada da função
+
+num1: .word 15
+num2: .word 9
