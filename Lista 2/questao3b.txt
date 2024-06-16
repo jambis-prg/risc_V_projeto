@@ -101,21 +101,34 @@ Mul:
 ----------------------------
 Total Parcial: 227 + 289 + 193 + 7020
 
-(Pior Caso: 9 chamadas e (2^31-1)/10 iterações)
-# No pior caso apenas a primeira chamada teria (2^31-1)/10 iterações
-# Mas para facilitar os cálculos, consideramos que todas teriam
+(Pior Caso: 9 chamadas e (2^31-1)/10 iterações na primeira chamada)
 Div_By_Ten:
-    addi - 4 ciclos * 3 * 9 * (2^31-1)/10
+    addi - 4 ciclos * 3
 
     # while (resto >= divisor)
-    blt - 4 ciclos * 9 * (2^31-1)/10
+    blt - 4 ciclos
     Div_loop:
-        sub - 4 ciclos * 9 * (2^31-1)/10
-        addi - 4 ciclos * 9 * (2^31-1)/10
-        bge - 4 ciclos * 9 * (2^31-1)/10
+        sub - 4 ciclos
+        addi - 4 ciclos
+        bge - 4 ciclos
+    -----------------------
+    Pior Caso da de Div_By_Ten
+    7 instruções de 4 ciclos:
+    
+    214.748.364 * 4 * 7
+    21.474.836 * 4 * 7
+    21.474.83 * 4 * 7
+    214.748 * 4 * 7
+    21.474 * 4 * 7
+    2.147 * 4 * 7
+    214 * 4 * 7
+    21 * 4 * 7
+    2 * 4 * 7
+ + ------------
+   6.681.060.092
 
     Div_exit:
         jalr - 4 ciclos
 ----------------------------
-Total Parcial: 227 + 289 + 193 + 7020 + 54.116.587.732
-Total: 54.116.595.461
+Total Parcial: 227 + 289 + 193 + 7020 + 6.681.060.096
+Total: 6.681.067.821
