@@ -1,148 +1,121 @@
-addi - 4 ciclos * 2 = 8
+addi - 4 ciclos * 2 
 
-get_num:
-    beq - 4 ciclos * 2
+# get_num
+L0:
+    lb - 5 ciclos * 5
+    addi - 4 ciclos * 5
+
+    # DIGITO 5 * 10000:
+    addi - 4 ciclos * 3 * 2
+    slli - 4 ciclos * 2
+    jal - 4 ciclos * 2
+
+    # DIGITO 4 * 1000:
+    addi - 4 ciclos * 2
+    add - 4 ciclos * 2 * 2
+    jal - 4 ciclos * 2
+
+    # DIGITO 3 * 100:
+    addi - 4 ciclos * 2
+    add - 4 ciclos * 2 * 2
+    jal - 4 ciclos * 2
+
+    # DIGITO 2 * 10
+    addi - 4 ciclos * 2
+    add - 4 ciclos * 2 * 2
+    jal - 4 ciclos * 2
+
+    # DIGITO 1 * 1
+    add - 4 ciclos * 2
+    bge - 4 ciclos * 2
+
+    addi - 4 ciclos
+    addi - 4 ciclos
+
+    lb - 5 ciclos
+    jal - 4 ciclos
+--------------------------
+Total parcial: 227 ciclos
+
+L1:
+    addi - 4 ciclos
+    addi - 4 ciclos
     jal - 4 ciclos
 
-    espaco:
-        lb - 5 ciclos
-
-    digitos:
-        lb - 5 ciclos * 5 * 2
-
-    ascii:
-        addi - 4 ciclos * 5 * 2
-
-     digito_5:
-        addi - 4 ciclos * 2
-        slli - 4 ciclos * 2
-
-        addi - 4 ciclos * 2
-
-        jal - 4 ciclos * 2
-        addi - 4 ciclos * 2
-
-    digito_4:
-        addi - 4 ciclos * 2
-        add - 4 ciclos * 2
-
-        jal - 4 ciclos * 2
-        add - 4 ciclos * 2
-
-    digito_3:
-        addi - 4 ciclos * 2
-        add - 4 ciclos * 2
-
-        jal - 4 ciclos * 2
-        add - 4 ciclos * 2
-
-    digito_2:
-        addi - 4 ciclos * 2
-        add - 4 ciclos * 2
-
-        jal - 4 ciclos * 2
-        add - 4 ciclos * 2
-
-    digito_1:
-        add - 4 ciclos * 2
-
-    salva:
-        beq - 4 ciclos * 2
-
-    salva_num2:
-        addi - 4 ciclos
-        jal - 4 ciclos
-
-    salva_num1:
-        addi - 4 ciclos
-        addi - 4 ciclos
-        jal - 4 ciclos
------------------------------ Total parcial: 282 ciclos
-
-mult:
-    add - 4 ciclos
-    jal - 4 ciclos
-	jal - 4 ciclos
-
-fim:
-	addi - 4 ciclos
-	
-    (Pior Caso 9 digitos)
-	print:
-		addi - 4 ciclos * 9
-		beq - 4 ciclos * 9
-	
-		slli - 4 ciclos * 9
-    		add - 4 ciclos * 9
+    blt - 4 ciclos
+    beq - 4 ciclos
     
-		lw - 5 ciclos * 9
-		sb - 4 ciclos * 9
-		addi - 4 ciclos * 9
-		jal - 4 ciclos * 9
--------------------------------- Total parcial: 595 ciclos
+    lw - 5 ciclos
+	addi - 4 ciclos * 3
 
-exit:
-	halt - Não executada
-
-5 chamadas
-Mul:
-    addi - 4 ciclos
-    addi - 4 ciclos
-
-    (Pior caso 32 iterações)
-    Mul_Loop:
-        and - 4 ciclos * 32
-        beq - 4 ciclos * 32
-        add - 4 ciclos * 32
-
-    Skip:
-        slli - 4 ciclos * 32
-        srli - 4 ciclos * 32
-        bne - 4 ciclos * 32
-
-    Exit_Loop:
-        jalr - 4 ciclos
--------------------------------- Total parcial: 4497 ciclos
-
-result_digits:
-    addi - 4 ciclos
-    addi - 4 ciclos
-    addi - 4 ciclos
-    addi - 4 ciclos
-
-    (Pior caso 9 dígitos)
-    loop:
-        bge - 4 ciclos * 9
-        dif:
-            beq - 4 ciclos * 9
-
+    # while temp > 0 (Pior Caso: 9 dígitos)
+    L2:
         jal - 4 ciclos * 9
-        addi - 4 ciclos * 9
-        addi - 4 ciclos * 9
 
-        slli - 4 ciclos * 9
+        addi - 4 ciclos * 9 * 3
+
         add - 4 ciclos * 9
         sw - 4 ciclos * 9
         addi - 4 ciclos * 9
 
-        jal - 4 ciclos * 9
------------------------------------ Total parcial: 4873 ciclos
+        blt - 4 ciclos * 9
+        bne - 4 ciclos * 9
+----------------------------
+Total Parcial: 227 + 289
 
-(Pior caso 9 chamadas)
-div:
-    addi - 4 ciclos
-    addi - 4 ciclos
-    addi - 4 ciclos
+# Printa os dígitos
+L3:
+	addi - 4 ciclos
 
-    (Pior caso aprox. 2^31 / 10 iterações)
-    div_loop:
-        blt - 4 ciclos * 2^31
-        sub - 4 ciclos * 2^31
-        addi - 4 ciclos * 2^31
-        jal - 4 ciclos * 2^31
-        
-        div_exit:
-            addi - 4 ciclos
-            jalr - 4 ciclos
+    (Pior Caso: 9 dígitos)
+	L4:
+		add - 4 ciclos * 9  
+		lb - 5 ciclos * 9
+		sb - 4 ciclos * 9
+    
+		addi - 4 ciclos * 9
+		bge - 4 ciclos * 9
+----------------------------
+Total Parcial: 227 + 289 + 193
 
-Total: 30.923.769.469 ciclos
+halt (Não executada)
+
+9 chamadas
+Mul:
+    addi - 4 ciclos * 9
+    addi - 4 ciclos * 9
+
+    (Pior Caso: 32 iterações)
+    Mul_Loop:
+        and - 4 ciclos * 9 * 32
+        beq - 4 ciclos * 9 * 32
+        add - 4 ciclos * 9 * 32
+
+    Skip:
+        slli - 4 ciclos * 9 * 32
+        srli - 4 ciclos * 9 * 32
+        bne - 4 ciclos * 9 * 32
+
+    Exit_Loop:
+        jalr - 4 ciclos * 9
+----------------------------
+Total Parcial: 227 + 289 + 193 + 7020
+
+(Pior Caso: 9 chamadas e (2^31-1)/10 iterações)
+# No pior caso apenas a primeira chamada teria (2^31-1)/10 iterações
+# Mas para facilitar os cálculos, consideramos que todas teriam
+Div_By_Ten:
+    addi - 4 ciclos * 3 * 9 * (2^31-1)/10
+
+    # while (resto >= divisor)
+    blt - 4 ciclos * 9 * (2^31-1)/10
+    Div_loop:
+        sub - 4 ciclos * 9 * (2^31-1)/10
+        addi - 4 ciclos * 9 * (2^31-1)/10
+        bge - 4 ciclos * 9 * (2^31-1)/10
+
+    Div_exit:
+        jalr - 4 ciclos
+----------------------------
+Total Parcial: 227 + 289 + 193 + 7020 + 54.116.587.732
+Total: 54.116.595.461
