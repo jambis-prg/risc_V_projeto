@@ -27,7 +27,7 @@ L0:
 
     # DIGITO 1 * 1
     add - 4 ciclos * 2
-    bge - 4 ciclos * 2
+    bge - 3 ciclos * 2
 
     addi - 4 ciclos
     addi - 4 ciclos
@@ -35,7 +35,7 @@ L0:
     lb - 5 ciclos
     jal - 4 ciclos
 --------------------------
-Total parcial: 227 ciclos
+Total parcial: 220 ciclos
 
 L1:
     addi - 4 ciclos
@@ -45,8 +45,8 @@ L1:
     addi - 4 ciclos * 3
 
     lw - 5 ciclos
-    blt - 4 ciclos
-    beq - 4 ciclos
+    blt - 3 ciclos
+    beq - 3 ciclos
 
 
     # while temp > 0 (Pior Caso: 9 dígitos)
@@ -60,25 +60,25 @@ L1:
         sw - 4 ciclos * 9
         addi - 4 ciclos * 9
 
-        blt - 4 ciclos * 9
-        bne - 4 ciclos * 9
+        blt - 3 ciclos * 9
+        bne - 3 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 397
+Total Parcial: 220 + 377
 
 # Printa os dígitos
 L3:
-	addi - 4 ciclos
+    addi - 4 ciclos
 
     (Pior Caso: 9 dígitos)
-	L4:
-		add - 4 ciclos * 9  
-		lb - 5 ciclos * 9
-		sb - 4 ciclos * 9
+    L4:
+        add - 4 ciclos * 9  
+	lb - 5 ciclos * 9
+	sb - 4 ciclos * 9
     
-		addi - 4 ciclos * 9
-		bge - 4 ciclos * 9
+	addi - 4 ciclos * 9
+	bge - 3 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 397 + 193
+Total Parcial: 227 + 377 + 184
 
 halt (Não executada)
 
@@ -90,47 +90,47 @@ Mul:
     (Pior Caso: 32 iterações)
     Mul_Loop:
         and - 4 ciclos * 9 * 32
-        beq - 4 ciclos * 9 * 32
+        beq - 3 ciclos * 9 * 32
         add - 4 ciclos * 9 * 32
 
     Skip:
         slli - 4 ciclos * 9 * 32
         srli - 4 ciclos * 9 * 32
-        bne - 4 ciclos * 9 * 32
+        bne - 3 ciclos * 9 * 32
 
     Exit_Loop:
         jalr - 4 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 397 + 193 + 7020
+Total Parcial: 227 + 377 + 184 + 6444
 
 (Pior Caso: 9 chamadas e (2^31-1)/10 iterações na primeira chamada)
 Div_By_Ten:
     addi - 4 ciclos * 3
 
     # while (resto >= divisor)
-    blt - 4 ciclos
+    blt - 3 ciclos
     Div_loop:
         sub - 4 ciclos
         addi - 4 ciclos
-        bge - 4 ciclos
+        bge - 3 ciclos
     -----------------------
     Pior Caso da de Div_By_Ten
-    7 instruções de 4 ciclos:
+    26 ciclos por iteração:
     
-    214.748.364 * 4 * 7
-    21.474.836 * 4 * 7
-    21.474.83 * 4 * 7
-    214.748 * 4 * 7
-    21.474 * 4 * 7
-    2.147 * 4 * 7
-    214 * 4 * 7
-    21 * 4 * 7
-    2 * 4 * 7
+    214.748.364 * 26
+    21.474.836 * 26
+    2.147.483 * 26
+    214.748 * 26
+    21.474 * 26
+    2.147 * 26
+    214 * 26
+    21 * 26
+    2 * 26
  + ------------
-   6.681.060.092
+   6.203.841.514
 
     Div_exit:
         jalr - 4 ciclos
 ----------------------------
-Total Parcial: 227 + 397 + 193 + 7020 + 6.681.060.096
-Total: 6.681.067.933
+Total Parcial: 227 + 377 + 184 + 6444 + 6.203.841.514
+Total: 6.203.848.746 ciclos
