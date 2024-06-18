@@ -12,7 +12,7 @@ L0:
     lb x30, 1025(x0) # digito 4
     lb x31, 1025(x0) # digito 5
 
-    #Convertendo os digitos de caracter para numeros
+    # Convertendo os digitos de caracter para inteiro
     addi x7, x7, -48
     addi x28, x28, -48
     addi x29, x29, -48
@@ -67,15 +67,14 @@ L1:
     addi x12, x20, 0 # Salva num1 em x12
     addi x13, x18, 0 # Salva num2 em x13
     jal x1, Mul # num1 * num2
-
-	lw x19, result_str_ptr # array p/ os digitos
-	addi x20, x0, 1 # if x10 == 0 then 1 digito 
-    blt x10, x0, L3 # if (x10 <= 0) then go to L3
-    beq x10, x0, L3
-    
-    addi x20, x0, 0 # cont
+	
+	addi x20, x0, 0 # cont
     addi x21, x10, 0 # temp
     addi x5, x0, 0 # digitos
+
+    lw x19, result_str_ptr # array p/ os digitos 
+    blt x10, x0, L4 # if (x10 <= 0) then go to L4
+    beq x10, x0, L4
 
     # while temp > 0
     L2:
@@ -94,7 +93,7 @@ L1:
         bne x21, x0, L2
 
 L3:
-    addi x20, x20, -1
+    addi x20, x20, -1 # correção
     L4:
         add x5, x19, x20 # x5 = address of arr[i]
         lb x5, 0(x5) # x5 = arr[i]
@@ -144,3 +143,4 @@ Div_By_Ten:
 
 result_str_ptr: .word result_str
 result_str: .byte 48
+
