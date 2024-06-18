@@ -42,14 +42,16 @@ L1:
     addi - 4 ciclos
     jal - 4 ciclos
 
+    addi - 4 ciclos * 3
+
+    lw - 5 ciclos
     blt - 4 ciclos
     beq - 4 ciclos
-    
-    lw - 5 ciclos
-	addi - 4 ciclos * 3
+
 
     # while temp > 0 (Pior Caso: 9 dígitos)
     L2:
+	addi - 4 ciclos * 9
         jal - 4 ciclos * 9
 
         addi - 4 ciclos * 9 * 3
@@ -61,7 +63,7 @@ L1:
         blt - 4 ciclos * 9
         bne - 4 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 289
+Total Parcial: 227 + 397
 
 # Printa os dígitos
 L3:
@@ -76,7 +78,7 @@ L3:
 		addi - 4 ciclos * 9
 		bge - 4 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 289 + 193
+Total Parcial: 227 + 397 + 193
 
 halt (Não executada)
 
@@ -99,7 +101,7 @@ Mul:
     Exit_Loop:
         jalr - 4 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 289 + 193 + 7020
+Total Parcial: 227 + 397 + 193 + 7020
 
 (Pior Caso: 9 chamadas e (2^31-1)/10 iterações na primeira chamada)
 Div_By_Ten:
@@ -130,5 +132,5 @@ Div_By_Ten:
     Div_exit:
         jalr - 4 ciclos
 ----------------------------
-Total Parcial: 227 + 289 + 193 + 7020 + 6.681.060.096
-Total: 6.681.067.821
+Total Parcial: 227 + 397 + 193 + 7020 + 6.681.060.096
+Total: 6.681.067.933
