@@ -67,11 +67,12 @@ L1:
     addi x12, x20, 0 # Salva num1 em x12
     addi x13, x18, 0 # Salva num2 em x13
     jal x1, Mul # num1 * num2
- 
+
+	lw x19, result_str_ptr # array p/ os digitos
+	addi x20, x0, 1 # if x10 == 0 then 1 digito 
     blt x10, x0, L3 # if (x10 <= 0) then go to L3
     beq x10, x0, L3
-
-    lw x19, result_str_ptr # array p/ os digitos
+    
     addi x20, x0, 0 # cont
     addi x21, x10, 0 # temp
     addi x5, x0, 0 # digitos
@@ -142,4 +143,4 @@ Div_By_Ten:
         jalr x0, 0(x1)
 
 result_str_ptr: .word result_str
-result_str: .byte 0
+result_str: .byte 48
