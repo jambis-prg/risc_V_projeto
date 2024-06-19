@@ -7,11 +7,11 @@ lb - 4 * 5
 add - 3 * 4
 sub - 4 * 4
 slli - 3 * 4
-beq -  11 * 4
+beq -  11 * 3
 sb - 2 * 4
 
-Ciclos total = 244
+Ciclos total = 233
 instruções = 60
 
-CPI = 244 / 60
-CPI = 4 aproximadamente
+CPI = 233 / 60
+CPI = 3,9 aproximadamente
