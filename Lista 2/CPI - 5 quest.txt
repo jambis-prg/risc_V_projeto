@@ -38,7 +38,7 @@ Ciclos: 41
 intruções: 9
 
 Por caso:
-(exceto o caso 6 que aumenta 8 ciclos e 2 instruções)
+(exceto o caso 6 que aumenta 7 ciclos e 2 instruções)
 
 addi - 2 * 4
 blt - 1 * 4
@@ -105,27 +105,27 @@ T5:
 	CPU: ( 29 * 4 ) / 100 = 1,16
 
 T6:
-	Padrão + 6 Por caso (Aq só aumenta 2 instruções e 8 ciclos)
+	Padrão + 6 Por caso (Aq só aumenta 2 instruções e 7 ciclos)
 
-	Ciclos: 130
+	Ciclos: 123
 	Instruções: 31
-	CPI: 4,1
+	CPI: 4
 	
 	Frequência: 100 hz
 	
-	CPU: ( 31 * 4,1 ) / 100 = 1,27
+	CPU: ( 31 * 4 ) / 100 = 1,24
 
-Taxa: (1,27 + 1,16 + 1 + 0,84 + 0,67 + 0,56) / 6
-Taxa: 0,95 s
+Taxa: (1,24 + 1,16 + 1 + 0,84 + 0,67 + 0,56) / 6
+Taxa: 0,915 s
 
 * Se tivesse sped-up de 10x *
 
-Taxa / 10 -> 0,95 / 10 -> 0,095
+Taxa / 10 -> 0,915 / 10 -> 0,0915
 
-Taxa deveria ser 0,095 para isso:
+Taxa deveria ser 0,0951 para isso:
 
-(31 * 4,1) / x = 0,095
-x = 127 / 0,095
+(31 * 4,1) / x = 0,0915
+x = 127 / 0,0915
 
-x = 1.337 hz
+x = 1.388 hz aproximadamente 
 
