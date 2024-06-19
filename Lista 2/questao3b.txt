@@ -49,36 +49,36 @@ L1:
     beq - 3 ciclos
 
 
-    # while temp > 0 (Pior Caso: 9 dígitos)
+    # while temp > 0 (Pior Caso: 10 dígitos)
     L2:
-	addi - 4 ciclos * 9
-        jal - 4 ciclos * 9
+	addi - 4 ciclos * 10
+        jal - 4 ciclos * 10
 
-        addi - 4 ciclos * 9 * 3
+        addi - 4 ciclos * 10 * 3
 
-        add - 4 ciclos * 9
-        sw - 4 ciclos * 9
-        addi - 4 ciclos * 9
+        add - 4 ciclos * 10
+        sw - 4 ciclos * 10
+        addi - 4 ciclos * 10
 
-        blt - 3 ciclos * 9
-        bne - 3 ciclos * 9
+        blt - 3 ciclos * 10
+        bne - 3 ciclos * 10
 ----------------------------
-Total Parcial: 220 + 377
+Total Parcial: 220 + 415
 
 # Printa os dígitos
 L3:
     addi - 4 ciclos
 
-    (Pior Caso: 9 dígitos)
+    (Pior Caso: 10 dígitos)
     L4:
-        add - 4 ciclos * 9  
-	lb - 5 ciclos * 9
-	sb - 4 ciclos * 9
+        add - 4 ciclos * 10
+	lb - 5 ciclos * 10
+	sb - 4 ciclos * 10
     
-	addi - 4 ciclos * 9
-	bge - 3 ciclos * 9
+	addi - 4 ciclos * 10
+	bge - 3 ciclos * 10
 ----------------------------
-Total Parcial: 227 + 377 + 184
+Total Parcial: 227 + 415 + 204
 
 halt (Não executada)
 
@@ -101,36 +101,28 @@ Mul:
     Exit_Loop:
         jalr - 4 ciclos * 9
 ----------------------------
-Total Parcial: 227 + 377 + 184 + 6444
+Total Parcial: 227 + 415 + 204 + 6444
 
-(Pior Caso: 9 chamadas e (2^31-1)/10 iterações na primeira chamada)
+(Pior Caso: 10 chamadas e 32 iterações por chamada)
 Div_By_Ten:
-    addi - 4 ciclos * 3
+	addi - 4 ciclos * 3 * 10
+	slli - 4 ciclos * 10
+	addi - 4 ciclos * 2 * 10
+	Div_L0:
+		and - 4 ciclos * 10 * 32
+		slli - 4 ciclos * 3 * 10 * 32
+		beq - 3 ciclos * 10 * 32
+		addi - 4 ciclos * 10 * 32
 
-    # while (resto >= divisor)
-    blt - 3 ciclos
-    Div_loop:
-        sub - 4 ciclos
-        addi - 4 ciclos
-        bge - 3 ciclos
-    -----------------------
-    Pior Caso da de Div_By_Ten
-    26 ciclos por iteração:
-    
-    214.748.364 * 26
-    21.474.836 * 26
-    2.147.483 * 26
-    214.748 * 26
-    21.474 * 26
-    2.147 * 26
-    214 * 26
-    21 * 26
-    2 * 26
- + ------------
-   6.203.841.514
-
-    Div_exit:
-        jalr - 4 ciclos
+		Div_L1:
+			blt - 3 ciclos * 10 * 32
+			sub - 4 ciclos * 10 * 32
+			addi - 4 ciclos * 10 * 32
+		Div_L2:	
+			addi - 4 ciclos * 10 * 32
+			bne - 3 ciclos * 10 * 32
+	
+	jalr - 4 ciclos * 10
 ----------------------------
-Total Parcial: 227 + 377 + 184 + 6444 + 6.203.841.514
-Total: 6.203.848.746 ciclos
+Total Parcial: 227 + 415 + 204 + 6444 + 13360
+Total: 20650 ciclos
