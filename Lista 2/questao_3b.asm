@@ -70,7 +70,6 @@ L1:
 	
 	addi x20, x0, 0 # cont
     addi x21, x10, 0 # temp
-    addi x5, x0, 0 # digitos
 
     lw x19, result_str_ptr # array p/ os digitos 
     blt x10, x0, L4 # if (x10 <= 0) then go to L4
@@ -78,7 +77,7 @@ L1:
 
     # while temp > 0
     L2:
-        addi x11, x21, 0 # Div_By_Ten(temp);
+        addi x12, x21, 0 # Div_By_Ten(temp);
         jal x1, Div_By_Ten
 
         addi x21, x10, 0 # temp = Div_By_Ten(temp).first;
@@ -125,22 +124,35 @@ Mul:
 
     jalr x0, 0(x1) # Retorna a chamada da função
 
-# x10 = quociente ( return result_first )
-# x11 = resto = dividendo ( return result_second )
-Div_By_Ten:
-    addi x5, x0, 10 # divisor
-    addi x10, x0, 0
 
-    # while( resto >= divisor )
-    blt x11, x5, Return_Div_By_Ten
-    Div_Loop:
-        sub x11, x11, x5 # resto -= 10;
-        addi x10, x10, 1 # quociente++;
-        bge x11, x5, Div_Loop
-        
-    Return_Div_By_Ten:
-        jalr x0, 0(x1)
+#Quociente - x10 Resto - x11
+#Dividendo - x12
+Div_By_Ten:
+	addi x10, x0, 0
+	addi x11, x0, 0
+
+	addi x5, x0, 1
+	slli x5, x5, 31
+	addi x7, x0, 32 # i = 32
+	addi x28, x0, 10 # Divisor = 10
+	Div_L0:
+		and x6, x12, x5
+		slli x12, x12, 1
+		slli x11, x11, 1
+		slli x10, x10, 1
+
+		beq x6, x0, Div_L1 # if (x6 != 0)
+		addi x11, x11, 1
+
+		Div_L1:
+			blt x11, x28, Div_L2
+			sub x11, x11, x28
+			addi x10, x10, 1
+		Div_L2:	
+			addi x7, x7, -1 # i--
+			bne x7, x0, Div_L0 # while (i != 0)
+			
+	jalr x0, 0(x1)
 
 result_str_ptr: .word result_str
 result_str: .byte 48
-
